@@ -1,0 +1,45 @@
+{
+  "name": "SmokeAlarm",
+  "description": "An app sounds an alarm and notifies you with a push message whenever smoke is detected",
+  "elements": [
+    {
+      "name": "SmokeSensor",
+      "type": "SmokeSensor"
+    },
+    {
+      "name": "Alarm",
+      "type": "Alarm"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "SmokeSensor",
+      "outport": "SmokeDetectedPort",
+      "to": "App",
+      "inport": "SmokeDetectedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TriggerAlarmPort",
+      "to": "Alarm",
+      "inport": "TriggerAlarmPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushMessagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushMessagePort",
+      "mode": "simplex"
+    }
+  ]
+}

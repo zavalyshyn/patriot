@@ -1,0 +1,40 @@
+{
+  "name": "OR",
+  "description": "OR element fires an event if any of its inputs are triggered",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "ORIn1",
+      "type": "ORInPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 2,
+      "tag": "ORIn2",
+      "type": "ORInPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 3,
+      "tag": "OROut",
+      "type": "OROutPort",
+      "dataType": {
+        "in": null,
+        "out": ["BooleanType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "ORModule"
+}

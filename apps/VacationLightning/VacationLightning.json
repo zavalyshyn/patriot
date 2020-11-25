@@ -1,0 +1,51 @@
+{
+  "name": "VacationLightning",
+  "description": "An app simulates user presence by turning the lights on and off when the house is empty",
+  "elements": [
+    {
+      "name": "Repeater",
+      "type": "Repeater",
+      "config": {
+        "repeatInterval": 5000
+      }
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "Repeater",
+      "outport": "RepeaterControlSignalPort",
+      "to": "App",
+      "inport": "RepeaterControlSignalPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOnLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOnLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetLightStatePort",
+      "to": "SmartLight",
+      "inport": "GetLightStatePort",
+      "mode": "duplex"
+    }
+  ]
+}

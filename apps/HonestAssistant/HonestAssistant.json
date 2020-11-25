@@ -1,0 +1,38 @@
+{
+  "name": "HonestAssistant",
+  "description": "An app receives an audio recording from the device and checks if a wake word was pronounced. If it was - the audio is sent to the cloud server for further processing. If not - it will ignore the audio",
+  "elements": [
+    {
+      "name": "WakewordDetection",
+      "type": "WakewordDetection"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "1.1.1.1",
+        "path": "/audio"
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "WakewordDetection",
+      "outport": "AudioPort",
+      "to": "App",
+      "inport": "AudioPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "HttpPostPort",
+      "to": "HttpRequest",
+      "inport": "HttpPostPort",
+      "mode": "duplex"
+    }
+  ]
+}

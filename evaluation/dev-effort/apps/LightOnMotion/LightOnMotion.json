@@ -1,0 +1,69 @@
+{
+  "name": "LightOnMotion",
+  "description": "Auto lights on/off",
+  "elements": [
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    },
+    {
+      "name": "MotionDetector",
+      "type": "MotionDetector"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 60000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "MotionDetector",
+      "outport": "MotionDetectedPort",
+      "to": "App",
+      "inport": "MotionDetectedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StartTimerPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StopTimerPort",
+      "to": "Timer",
+      "inport": "StopTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOnPort",
+      "to": "SmartLight",
+      "inport": "TurnOnPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffPort",
+      "to": "SmartLight",
+      "inport": "TurnOffPort",
+      "mode": "simplex"
+    }
+  ]
+}

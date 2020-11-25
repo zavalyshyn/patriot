@@ -1,0 +1,51 @@
+{
+  "name": "HttpRequest",
+  "description": "Interface to an Http Request service (PUT,GET,POST,DELETE)",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "HttpGet",
+      "type": "HttpGetPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["DataType"]
+      },
+      "mode": "duplex",
+      "issuer": "simplex"
+    },
+    {
+      "portNum": 2,
+      "tag": "HttpPut",
+      "type": "HttpPutPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["DataType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 3,
+      "tag": "HttpPost",
+      "type": "HttpPostPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["DataType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 4,
+      "tag": "HttpDelete",
+      "type": "HttpDeletePort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["BooleanType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "HttpRequestModule"
+}

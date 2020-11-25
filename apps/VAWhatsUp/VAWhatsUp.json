@@ -1,0 +1,48 @@
+{
+  "name": "VAWhatsUp",
+  "description": "A voice-activated app that tells you the latest news headlines when you ask for it",
+  "elements": [
+    {
+      "name": "VoiceAssistant",
+      "type": "VoiceAssistant",
+      "config": {
+        "wakeword": "what's up"
+      }
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "newsapi.org",
+        "path": "/v2/top-headlines"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "VoiceAssistant",
+      "outport": "VoiceCommandPort",
+      "to": "App",
+      "inport": "VoiceCommandPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SayTextPort",
+      "to": "VoiceAssistant",
+      "inport": "SayTextPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "HttpGetPort",
+      "to": "HttpRequest",
+      "inport": "HttpGetPort",
+      "mode": "duplex"
+    }
+  ]
+}

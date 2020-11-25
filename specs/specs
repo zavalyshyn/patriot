@@ -1,0 +1,70 @@
+
+============================
+SPECIFICATION OF DATA TYPES
+KeyType: KeyTypeClass <-> keytype(d)
+============================
+SPECIFICATION OF ELEMENTS (General) => 1 spec per element
+Element:
+    - Name: Camera
+    - Ports [
+        - Port: 1
+            Tag: FrameFeed
+            Type: FrameClass
+            Mode: simplex
+            Issuer: active
+        - Port: 2
+            Tag: MotionDetected
+            Type: BooleanClass
+            Mode: simplex
+            Issuer: active
+    ]
+    - Implementation: CameraModule
+Element:
+    - Name: KV Store
+    - Ports [
+        - Port: 1
+            Tag: KVSGet
+            Type: KVSGetPort
+            Mode: duplex [ KeyType, ValueType]
+            Issuer: passive
+        - Port: 2
+            Tag: KVSPut
+            Type: KVSPutPort
+            Mode: duplex [ (KeyType,ValueType), Status]
+            Issuer: passive
+    ]
+    - Implementation: KVStoreModule
+Element:
+    - Name: OR
+    - Ports [
+        - Port: 1
+            Tag: ORIn1
+            Type: ORInPort
+            Mode: simplex [ BooleanType ]
+            Issuer: passive
+        - Port: 2
+            Tag: ORIn2
+            Type: ORInPort
+            Mode: simplex [ BooleanType ]
+            Issuer: passive
+        - Port: 3
+            Tag: OROut
+            Type: OROutPort
+            Mode: simplex [ BooleanType ]
+            Issuer: active
+    ]
+    - Implementation: ORModule
+============================
+SPECIFICATION OF APPLICATION
+// list of element instances
+element camera = new Camera
+element kvstore = new KV Store
+element or1 = new OR
+element or2 = new OR
+
+// list of connections
+camera.FrameFeed -> kvstore.KVSGet
+or1.OROut -> or2.ORIn1
+
+
+

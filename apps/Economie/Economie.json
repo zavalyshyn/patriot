@@ -1,0 +1,23 @@
+{
+  "name": "Economie",
+  "description": "An app automatically turns off all the selected devices when you leave",
+  "elements": [
+    {
+      "name": "PresenceSensor",
+      "type": "PresenceSensor"
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    }
+  ],
+  "connections":[
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonLeftPort",
+      "to": "SmartLight",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    }
+  ]
+}

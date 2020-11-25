@@ -1,0 +1,29 @@
+{
+  "name": "Speech Recognition",
+  "description": "Interface to a speech recognition service",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "SpeechRec",
+      "type": "SpeechRecPort",
+      "dataType": {
+        "in": ["AudioType"],
+        "out": ["TextType"]
+      },
+      "mode": ["duplex","simplex"],
+      "issuer": "passive"
+    },
+    {
+      "portNum": 2,
+      "tag": "SpeechRecOut",
+      "type": "SpeechRecOutPort",
+      "dataType": {
+        "in": null,
+        "out": ["TextType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "SpeechRecModule"
+}

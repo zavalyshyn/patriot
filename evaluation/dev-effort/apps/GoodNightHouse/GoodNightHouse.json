@@ -1,0 +1,98 @@
+{
+  "name": "LeftItOpen",
+  "description": "Notify if door or window is opened for too long",
+  "elements": [
+    {
+      "name": "AppTouch",
+      "type": "AppTouch"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 60000
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "SmartLight1",
+      "type": "SmartLight"
+    },
+    {
+      "name": "SmartLight2",
+      "type": "SmartLight"
+    },
+    {
+      "name": "HomeMode",
+      "type": "HomeMode",
+      "config": {
+        "mode": "night"
+      }
+    },
+    {
+      "name": "DoorLock",
+      "type": "DoorLock"
+    }
+  ],
+  "connections":[
+    {
+      "from": "AppTouch",
+      "outport": "TouchedPort",
+      "to": "App",
+      "inport": "TouchedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOnLightPort",
+      "to": "SmartLight1",
+      "inport": "TurnOnLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffLightPort",
+      "to": "SmartLight2",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StartTimerPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetModePort",
+      "to": "HomeMode",
+      "inport": "GetModePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "SetModePort",
+      "to": "HomeMode",
+      "inport": "SetModePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "LockDoorPort",
+      "to": "DoorLock",
+      "inport": "LockDoorPort",
+      "mode": "simplex"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "LeftItOpen",
+  "description": "Notify if door or window is opened for too long",
+  "elements": [
+    {
+      "name": "ContactSensor",
+      "type": "ContactSensor"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 60000
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "SMSNotifier",
+      "type": "SMSNotifier"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "ContactSensor",
+      "outport": "ContactOpenPort",
+      "to": "App",
+      "inport": "ContactOpenPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "ContactSensor",
+      "outport": "ContactClosedPort",
+      "to": "App",
+      "inport": "ContactClosedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StartTimerPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StopTimerPort",
+      "to": "Timer",
+      "inport": "StopTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendSMSPort",
+      "to": "SMSNotifier",
+      "inport": "SendSMSPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushPort",
+      "to": "PushNotifier",
+      "inport": "SendPushPort",
+      "mode": "simplex"
+    }
+  ]
+}

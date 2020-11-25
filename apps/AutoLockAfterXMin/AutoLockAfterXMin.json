@@ -1,0 +1,33 @@
+{
+  "name": "AutoLockAfterXMin",
+  "description": "An app locks the door automatically after 30 sec",
+  "elements": [
+    {
+      "name": "DoorLock",
+      "type": "DoorLock"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 1000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "DoorLock",
+      "outport": "DoorOpenedPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "DoorLock",
+      "inport": "DoorLockClosePort",
+      "mode": "simplex"
+    }
+  ]
+}

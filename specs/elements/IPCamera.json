@@ -1,0 +1,29 @@
+{
+  "name": "IP Camera",
+  "description": "Interface to the IP camera's video feed",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "CameraFrame",
+      "type": "CameraFramePort",
+      "dataType": {
+        "in": null,
+        "out": ["FrameType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 2,
+      "tag": "MotionDetected",
+      "type": "MotionDetectedPort",
+      "dataType": {
+        "in": null,
+        "out": ["BooleanType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "IPCameraModule"
+}

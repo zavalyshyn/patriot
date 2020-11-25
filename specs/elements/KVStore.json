@@ -1,0 +1,29 @@
+{
+  "name": "KV Store",
+  "description": "Interface to a Key-Value Store Database",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "KVSGet",
+      "type": "KVSGetPort",
+      "dataType": {
+        "in": ["KeyType"],
+        "out": ["ValueType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 2,
+      "tag": "KVSPut",
+      "type": "KVSPutPort",
+      "dataType": {
+        "in": ["KeyType","ValueType"],
+        "out": ["StatusType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "KVStoreModule"
+}

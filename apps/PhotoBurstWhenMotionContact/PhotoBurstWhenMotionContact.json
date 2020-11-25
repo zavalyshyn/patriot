@@ -1,0 +1,67 @@
+{
+  "name": "PhotoBurstWhenMotionContact",
+  "description": "An app makes a camera snapshot and sends SMS notification when the state of any of the following sensors changes: motion, accelration, contact, switch, presence",
+  "elements": [
+    {
+      "name": "MotionSensor",
+      "type": "MotionSensor"
+    },
+    {
+      "name": "ContactSensor",
+      "type": "ContactSensor"
+    },
+    {
+      "name": "OR",
+      "type": "OR"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    },
+    {
+      "name": "IPCamera",
+      "type": "IPCamera"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "MotionSensor",
+      "outport": "MotionDetectedPort",
+      "to": "OR",
+      "inport": "ORInPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "ContactSensor",
+      "outport": "ContactOpenPort",
+      "to": "OR",
+      "inport": "ORInPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "OR",
+      "outport": "OROutPort",
+      "to": "App",
+      "inport": "OROutPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetFramePort",
+      "to": "IPCamera",
+      "inport": "GetFramePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushWithImagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushWithImagePort",
+      "mode": "simplex"
+    }
+  ]
+}

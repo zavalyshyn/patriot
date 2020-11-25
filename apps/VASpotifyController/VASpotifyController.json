@@ -1,0 +1,48 @@
+{
+  "name": "VASpotifyController",
+  "description": "A voice-activated app that controls Spotify playlist. Try 'play music' command",
+  "elements": [
+    {
+      "name": "VoiceAssistant",
+      "type": "VoiceAssistant",
+      "config": {
+        "wakeword": "music"
+      }
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "api.spotify.com",
+        "path": "/v1/me/player/play"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "VoiceAssistant",
+      "outport": "VoiceCommandPort",
+      "to": "App",
+      "inport": "VoiceCommandPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SayTextPort",
+      "to": "VoiceAssistant",
+      "inport": "SayTextPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "HttpPutPort",
+      "to": "HttpRequest",
+      "inport": "HttpPutPort",
+      "mode": "simplex"
+    }
+  ]
+}

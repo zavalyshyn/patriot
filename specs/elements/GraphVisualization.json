@@ -1,0 +1,18 @@
+{
+  "name": "Graph Visualization",
+  "description": "Interface to a Graph Visualization service",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "GraphVis",
+      "type": "GraphVisPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "GraphVisModule"
+}

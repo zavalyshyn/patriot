@@ -1,0 +1,72 @@
+{
+  "name": "SmartCamera",
+  "description": "An app sends camera images to a remote storage only during a certain time of the day",
+  "privacy concern": "The application has access to camera (unlimited) and network. The user wants to be sure that the camera is inactive when he is at home",
+  "elements": [
+    {
+      "name": "IPCamera",
+      "type": "IPCamera"
+    },
+    {
+      "name": "TimeController",
+      "type": "TimeController",
+      "config": {
+        "starttime": "10:00",
+        "endtime": "18:00"
+      }
+    },
+    {
+      "name": "Tap",
+      "type": "Tap"
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "1.1.1.1",
+        "path": "/intrusion"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "IPCamera",
+      "outport": "CameraFramePort",
+      "to": "App",
+      "inport": "CameraFramePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TapInPort",
+      "to": "Tap",
+      "inport": "TapInPort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetTapStatePort",
+      "to": "Tap",
+      "inport": "GetTapStatePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "Tap",
+      "outport": "TapOutPort",
+      "to": "HttpRequest",
+      "inport": "HttpPostPort",
+      "mode": "duplex"
+    },
+    {
+      "from": "TimeController",
+      "outport": "ControlSignalPort",
+      "to": "Tap",
+      "inport": "TapConditionPort",
+      "mode": "simplex"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "EnergySaver",
+  "description": "Turns the devices off when power consumption is above a threshold",
+  "elements": [
+    {
+      "name": "PowerMeter",
+      "type": "PowerMeter"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "Switch",
+      "type": "Switch"
+    }
+  ],
+  "connections":[
+    {
+      "from": "PowerMeter",
+      "outport": "ConsumptionPort",
+      "to": "App",
+      "inport": "ConsumptionPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffPort",
+      "to": "Switch",
+      "inport": "TurnOffPort",
+      "mode": "simplex"
+    }
+  ]
+}

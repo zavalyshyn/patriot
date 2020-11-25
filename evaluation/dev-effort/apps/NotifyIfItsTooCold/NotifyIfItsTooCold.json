@@ -1,0 +1,51 @@
+{
+  "name": "NotifyIfItsTooCold",
+  "description": "Notifies the user if it's too cold",
+  "elements": [
+    {
+      "name": "TemperatureSensor",
+      "type": "TemperatureSensor"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "SMSNotifier",
+      "type": "SMSNotifier",
+      "config": {
+        "rate": 1800000
+      }
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier",
+      "config": {
+        "rate": 1800000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "TemperatureSensor",
+      "outport": "TemperaturePort",
+      "to": "App",
+      "inport": "TemperaturePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendSMSPort",
+      "to": "SMSNotifier",
+      "inport": "SendSMSPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushPort",
+      "to": "PushNotifier",
+      "inport": "SendPushPort",
+      "mode": "simplex"
+    }
+  ]
+}

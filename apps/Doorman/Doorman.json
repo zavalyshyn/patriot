@@ -1,0 +1,55 @@
+{
+  "name": "Doorman",
+  "description": "An app locks the door automatically when everyone leaves and opens it when someone arrives",
+  "elements": [
+    {
+      "name": "PresenceSensor",
+      "type": "PresenceSensor"
+    },
+    {
+      "name": "DoorLock",
+      "type": "DoorLock"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonLeftPort",
+      "to": "App",
+      "inport": "PersonLeftPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonArrivedPort",
+      "to": "App",
+      "inport": "PersonArrivedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "CheckPresencePort",
+      "to": "PresenceSensor",
+      "inport": "CheckPresencePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "DoorLockOpenPort",
+      "to": "DoorLock",
+      "inport": "DoorLockOpenPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "DoorLockClosePort",
+      "to": "DoorLock",
+      "inport": "DoorLockClosePort",
+      "mode": "simplex"
+    }
+  ]
+}

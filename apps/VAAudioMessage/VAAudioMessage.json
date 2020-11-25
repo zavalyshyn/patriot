@@ -1,0 +1,44 @@
+{
+  "name": "VAAudioMessage",
+  "description": "A voice-activated app that records an audio message and sends it to the selected contact as a push message",
+  "elements": [
+    {
+      "name": "VoiceAssistant",
+      "type": "VoiceAssistant",
+      "config": {
+        "wakeword": "message"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "VoiceAssistant",
+      "outport": "VoiceCommandPort",
+      "to": "App",
+      "inport": "VoiceCommandPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "RecordAudioPort",
+      "to": "VoiceAssistant",
+      "inport": "RecordAudioPort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushWithFilePort",
+      "to": "PushNotifier",
+      "inport": "SendPushWithFilePort",
+      "mode": "simplex"
+    }
+  ]
+}

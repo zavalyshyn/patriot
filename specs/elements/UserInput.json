@@ -1,0 +1,18 @@
+{
+  "name": "User Input",
+  "description": "Interface to a User Input",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "UserInput",
+      "type": "UserInputPort",
+      "dataType": {
+        "in": ["InputType"],
+        "out": ["OutputType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "UserInputModule"
+}

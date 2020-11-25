@@ -1,0 +1,21 @@
+export SCONE_QUEUES=4
+export SCONE_SLOTS=256
+export SCONE_SIGPIPE=0
+export SCONE_MMAP32BIT=0
+export SCONE_SSPINS=100
+export SCONE_SSLEEP=4000
+export SCONE_KERNEL=0
+export SCONE_HEAP=4294967296
+export SCONE_STACK=4194304
+export SCONE_CONFIG=/etc/sgx-musl.conf
+export SCONE_ESPINS=10000
+export SCONE_MODE=hw
+export SCONE_SGXBOUNDS=no
+export SCONE_VARYS=no
+export SCONE_ALLOW_DLOPEN=yes (unprotected)
+export SCONE_MPROTECT=no
+Revision: 4be39d5943d5c15e11fa17055b859de4a25c0288 (Thu Aug 23 14:14:04 2018 +0200)
+Branch: cf-java-fix (dirty)
+Configure options: --enable-shared --enable-debug --prefix=/home/christof/GIT/subtree-scone/built/cross-compiler/x86_64-linux-musl
+
+Enclave hash: 5312870a41536ce7f83aa2dc1946fde1fc4b54b32a3f1e7808baac2d9ace0468

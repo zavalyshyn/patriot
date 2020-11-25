@@ -1,0 +1,30 @@
+{
+  "name": "LetThereBeLight",
+  "description": "An app turns the lights on when you arrive and turns them off when you leave",
+  "elements": [
+    {
+      "name": "PresenceSensor",
+      "type": "PresenceSensor"
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    }
+  ],
+  "connections":[
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonLeftPort",
+      "to": "SmartLight",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonArrivedPort",
+      "to": "SmartLight",
+      "inport": "TurnOnLightPort",
+      "mode": "simplex"
+    }
+  ]
+}

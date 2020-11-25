@@ -1,0 +1,8 @@
+FROM sconecuratedimages/apps:node-8.9.4-alpine
+ENV SCONE_HEAP=4G
+RUN apk add --no-cache nodejs-npm cairo-dev pango-dev jpeg-dev gfortran openblas gsl lapack \
+	&& mkdir patriot
+RUN apk add libbsd
+COPY ./patriot/ patriot/
+CMD cd patriot; SCONE_VERSION=1 node main.js
+

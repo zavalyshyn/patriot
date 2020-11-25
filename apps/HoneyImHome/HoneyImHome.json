@@ -1,0 +1,34 @@
+{
+  "name": "HoneyImHome",
+  "description": "An app sends you a push message when someone arrives home",
+  "elements": [
+    {
+      "name": "PresenceSensor",
+      "type": "PresenceSensor"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "PresenceSensor",
+      "outport": "PersonArrivedPort",
+      "to": "App",
+      "inport": "PersonArrivedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushMessagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushMessagePort",
+      "mode": "simplex"
+    }
+  ]
+}

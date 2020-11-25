@@ -1,0 +1,40 @@
+{
+  "name": "Fitness Tracker",
+  "description": "Interface to a Fitness Tracker device",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "FitTrackerHR",
+      "type": "FitTrackerHRPort",
+      "dataType": {
+        "in": null,
+        "out": ["HeartRateType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 2,
+      "tag": "FitTrackerSteps",
+      "type": "FitTrackerStepsPort",
+      "dataType": {
+        "in": null,
+        "out": ["StepsMadeType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 3,
+      "tag": "FitTrackerVibrate",
+      "type": "FitTrackerVibratePort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "FitnessTrackerModule"
+}

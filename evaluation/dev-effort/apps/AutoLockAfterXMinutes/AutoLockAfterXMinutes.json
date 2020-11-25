@@ -1,0 +1,58 @@
+{
+  "name": "AutoLockAfterXMinutes",
+  "description": "Auto Lock Door",
+  "elements": [
+    {
+      "name": "DoorLock",
+      "type": "DoorLock"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 60000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "DoorLock",
+      "outport": "DoorStatePort",
+      "to": "App",
+      "inport": "DoorStatePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "LockDoorPort",
+      "to": "DoorLock",
+      "inport": "LockDoorPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SetTimerPort",
+      "to": "Timer",
+      "inport": "SetTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StopTimerPort",
+      "to": "Timer",
+      "inport": "StopTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    }
+  ]
+}

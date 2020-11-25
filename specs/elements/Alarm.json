@@ -1,0 +1,18 @@
+{
+  "name": "Alarm",
+  "description": "Interface to an Alarm device",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "TriggerAlarm",
+      "type": "TriggerAlarmPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "AlarmModule"
+}

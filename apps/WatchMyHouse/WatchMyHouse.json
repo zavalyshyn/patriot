@@ -1,0 +1,51 @@
+{
+  "name": "WatchMyHouse",
+  "description": "An app stores camera images to your Dropbox account with a 5 sec interval",
+  "elements": [
+    {
+      "name": "IPCamera",
+      "type": "IPCamera"
+    },
+    {
+      "name": "OAuthHttpRequest",
+      "type": "OAuthHttpRequest",
+      "config": {
+        "service": "dropbox"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "IntervalController",
+      "type": "IntervalController",
+      "config": {
+        "interval": 10000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "IPCamera",
+      "outport": "CameraFramePort",
+      "to": "IntervalController",
+      "inport": "ICInputEventPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "IntervalController",
+      "outport": "ICOutputEventPort",
+      "to": "App",
+      "inport": "ICOutputEventPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "OAuthHttpPostPort",
+      "to": "OAuthHttpRequest",
+      "inport": "OAuthHttpPostPort",
+      "mode": "simplex"
+    }
+  ]
+}

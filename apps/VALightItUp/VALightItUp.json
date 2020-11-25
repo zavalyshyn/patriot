@@ -1,0 +1,51 @@
+{
+  "name": "VALightItUp",
+  "description": "A voice-activated app that allows to control the lights with your voice",
+  "elements": [
+    {
+      "name": "VoiceAssistant",
+      "type": "VoiceAssistant",
+      "config": {
+        "wakeword": "light"
+      }
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "VoiceAssistant",
+      "outport": "VoiceCommandPort",
+      "to": "App",
+      "inport": "VoiceCommandPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOnLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOnLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetLightStatePort",
+      "to": "SmartLight",
+      "inport": "GetLightStatePort",
+      "mode": "duplex"
+    }
+  ]
+}

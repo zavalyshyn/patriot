@@ -1,0 +1,23 @@
+{
+  "name": "SmokeAlert",
+  "description": "An app blinks lights with red color whenever smoke is detected",
+  "elements": [
+    {
+      "name": "SmokeSensor",
+      "type": "SmokeSensor"
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    }
+  ],
+  "connections":[
+    {
+      "from": "SmokeSensor",
+      "outport": "SmokeDetectedPort",
+      "to": "SmartLight",
+      "inport": "BlinkLightPort",
+      "mode": "simplex"
+    }
+  ]
+}

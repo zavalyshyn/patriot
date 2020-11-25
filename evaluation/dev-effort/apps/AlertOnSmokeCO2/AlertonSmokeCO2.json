@@ -1,0 +1,59 @@
+{
+  "name": "AlertonSmokeCO2",
+  "description": "Notify Me When Smoke or Carbon Monoxide is Detected",
+  "elements": [
+    {
+      "name": "SmokeDetector",
+      "type": "SmokeDetector"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "SMSNotifier",
+      "type": "SMSNotifier"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "SmokeDetector",
+      "outport": "CO2Port",
+      "to": "App",
+      "inport": "CO2Port",
+      "mode": "simplex"
+    },
+    {
+      "from": "SmokeDetector",
+      "outport": "SmokePort",
+      "to": "App",
+      "inport": "SmokePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "SmokeDetector",
+      "outport": "BatteryPort",
+      "to": "App",
+      "inport": "BatteryPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendSMSPort",
+      "to": "SMSNotifier",
+      "inport": "SendSMSPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushPort",
+      "to": "PushNotifier",
+      "inport": "SendPushPort",
+      "mode": "simplex"
+    }
+  ]
+}

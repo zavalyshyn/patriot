@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <title>Network | Basic usage</title>
+
+    <script type="text/javascript" src="/js/vis.min.js"></script>
+    <link href="/css/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #graph {
+            height:100vh; /* full screen always */
+            border: 1px solid lightgray;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<p>
+    <%- options.appName %> Application graph.
+</p>
+
+<div id="graph"></div>
+
+<script type="text/javascript">
+
+    // create an array with nodes
+    var nodes = new vis.DataSet(<%- JSON.stringify(options.nodes) %>);
+
+    // create an array with edges
+    var edges = new vis.DataSet(<%- JSON.stringify(options.edges) %>);
+
+    // create a network
+    var container = document.getElementById('graph');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+
+    var options = {
+        autoResize: true,
+
+        layout: {
+            hierarchical: {
+                levelSeparation: 150,
+                nodeSpacing: 100,
+                treeSpacing: 200,
+                blockShifting: true,
+                edgeMinimization: true,
+                parentCentralization: true,
+                direction: 'UD',        // UD, DU, LR, RL
+                sortMethod: 'directed'   // hubsize, directed
+            }
+        },
+        edges: {
+            arrows: {
+                to:     {enabled: true, scaleFactor:1, type:'arrow'}
+            },
+            font: {
+                size: 12
+            }
+        },
+        nodes: {
+            shape: 'box',
+            margin: 10,
+            color: {
+                border: 'black',
+                background: 'white',
+            },
+            borderWidth: 2,
+            borderWidthSelected: 3
+        }
+    };
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+    // fit the page size
+    network.fit();
+
+
+</script>
+
+
+</body>
+</html>

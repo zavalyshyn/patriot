@@ -1,0 +1,69 @@
+{
+  "name": "LightMyPath",
+  "description": "An app detects the motion and turns on the lights automatically. After 30 sec of no motion it will turn the lights off",
+  "elements": [
+    {
+      "name": "MotionSensor",
+      "type": "MotionSensor"
+    },
+    {
+      "name": "SmartLight",
+      "type": "SmartLight"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 5000
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "MotionSensor",
+      "outport": "MotionDetectedPort",
+      "to": "App",
+      "inport": "MotionDetectedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "MotionSensor",
+      "outport": "MotionDetectedPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOnLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOnLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffLightPort",
+      "to": "SmartLight",
+      "inport": "TurnOffLightPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetLightStatePort",
+      "to": "SmartLight",
+      "inport": "GetLightStatePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    }
+  ]
+}

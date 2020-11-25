@@ -1,0 +1,105 @@
+{
+  "name": "WindowCheck",
+  "description": "Checks if thermostat is not on when window is opened. Notifies the user/ shuts down the thermostat",
+  "elements": [
+    {
+      "name": "ContactSensor",
+      "type": "ContactSensor"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "Thermostat",
+      "type": "Thermostat"
+    },
+    {
+      "name": "SMSNotifier",
+      "type": "SMSNotifier"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 60000
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "ContactSensor",
+      "outport": "ContactStatePort",
+      "to": "App",
+      "inport": "ContactStatePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetContactStatePort",
+      "to": "ContactSensor",
+      "inport": "GetContactStatePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetThermostatStatePort",
+      "to": "Thermostat",
+      "inport": "GetThermostatStatePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "TurnOffThermostatPort",
+      "to": "Thermostat",
+      "inport": "TurnOffThermostatPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Thermostat",
+      "outport": "ThermostatStatePort",
+      "to": "App",
+      "inport": "ThermostatStatePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StartTimerPort",
+      "to": "Timer",
+      "inport": "StartTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "StopTimerPort",
+      "to": "Timer",
+      "inport": "StopTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "App",
+      "inport": "TimerExpiredPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendSMSPort",
+      "to": "SMSNotifier",
+      "inport": "SendSMSPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushPort",
+      "to": "PushNotifier",
+      "inport": "SendPushPort",
+      "mode": "simplex"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "PushNotifier",
+  "description": "Sends push message to the home owner's mobile phone",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "PushSend",
+      "type": "PushSendPort",
+      "dataType": {
+        "in": ["TextType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    }
+  ],
+  "implementation": "PushNotifierModule"
+}

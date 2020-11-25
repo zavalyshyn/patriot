@@ -1,0 +1,48 @@
+{
+  "name": "VAWillItRain",
+  "description": "A voice-activated app that tells you if it will rain today or not",
+  "elements": [
+    {
+      "name": "VoiceAssistant",
+      "type": "VoiceAssistant",
+      "config": {
+        "wakeword": "rain"
+      }
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "api.openweathermap.org",
+        "path": "/data/2.5/weather"
+      }
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "VoiceAssistant",
+      "outport": "VoiceCommandPort",
+      "to": "App",
+      "inport": "VoiceCommandPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SayTextPort",
+      "to": "VoiceAssistant",
+      "inport": "SayTextPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "HttpGetPort",
+      "to": "HttpRequest",
+      "inport": "HttpGetPort",
+      "mode": "duplex"
+    }
+  ]
+}

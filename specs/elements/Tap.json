@@ -1,0 +1,51 @@
+{
+  "name": "Tap",
+  "description": "Tap element allows the data flow a long as certain condition holds",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "TapIn",
+      "type": "TapInPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["DataType"]
+      },
+      "mode": "duplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 2,
+      "tag": "TapCondition1",
+      "type": "TapConditionPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 3,
+      "tag": "TapCondition2",
+      "type": "TapConditionPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 4,
+      "tag": "TapOut",
+      "type": "TapOutPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": ["DataType"]
+      },
+      "mode": "duplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "TapModule"
+}

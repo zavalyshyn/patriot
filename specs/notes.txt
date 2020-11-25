@@ -1,0 +1,41 @@
+Problems found:
+
+- The ports of untrusted elements need to be specified as well. This is needed in order to specify connections in app's
+manifest file.
+
+- trusted elements are not really compatible with each other if connected directly, e.g. Microphone -> VoiceRecognition -> App
+In this case the outgoing port of Microphone sends an event to the VoiceRecognition element. The VoiceRecognition is
+triggered by this event, runs the voice recognition but outputs an event on a completely different port that connects to
+the untrusted app element. OR element is the same. It outputs on a different port then the ports that receive the inputs.
+
+- OR element can have several input ports depending on the use-case. We need to have a ways to specify dynamic port number for
+some of the elements. OR element also has strict only-input and only-output ports.
+
+- Some elements like KV Store or GraphVisualization elements operate with unknown data types. We can't be sure about the
+type of data they receive on their inputs and/or outputs. This can only be guessed by knowing what elements were used
+previously or what data types the untrusted app element had access to before, which is again quite speculative. This is a
+serious problem - we can't reason about the leakage of personal data if we don't know for sure which data type the untrusted
+element operates with, moreover if there are several of them.
+
+- the app manifest needs to specify what event (or event on which port) triggers the execution of the application. In case of
+voice assistant it's a output of the speech recognition element
+
+fromcameraelement
+
+frameEvent = {
+    "frame64": "4r4fer4g4g",
+    "timestampt": 2342323432
+}
+
+adaptor 2 ports
+in and out
+
+
+Facerecogntion
+
+{
+image: efewfewfewfe324324f34t4
+}
+
+
+

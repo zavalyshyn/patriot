@@ -1,0 +1,165 @@
+{
+  "name": "SmartSecurity",
+  "description": "When motion or contact open is detected the app will switch an alarm on, take photo, send push message & photo to the user and then wait for his actions. If the user dismisses the alarm within 1 min, the app does nothing. If the dismiss was not received after 1 min, the message and all further photos from camera are sent to the security agent company",
+  "privacy concern": "An app has access to camera and HTTP Request modules. We need to control what it can do",
+  "elements": [
+    {
+      "name": "MotionSensor",
+      "type": "MotionSensor"
+    },
+    {
+      "name": "ContactSensor",
+      "type": "ContactSensor"
+    },
+    {
+      "name": "OR",
+      "type": "OR"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    },
+    {
+      "name": "IPCamera",
+      "type": "IPCamera"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "Alarm",
+      "type": "Alarm"
+    },
+    {
+      "name": "Timer",
+      "type": "Timer",
+      "config": {
+        "time": 10000
+      }
+    },
+    {
+      "name": "Tap",
+      "type": "Tap"
+    },
+    {
+      "name": "NOT",
+      "type": "NOT"
+    },
+    {
+      "name": "HttpRequest",
+      "type": "HttpRequest",
+      "config": {
+        "hostname": "1.1.1.1",
+        "path": "/intrusion"
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "MotionSensor",
+      "outport": "MotionDetectedPort",
+      "to": "OR",
+      "inport": "ORInPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "ContactSensor",
+      "outport": "ContactOpenPort",
+      "to": "OR",
+      "inport": "ORInPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "OR",
+      "outport": "OROutPort",
+      "to": "App",
+      "inport": "OROutPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "OR",
+      "outport": "OROutPort",
+      "to": "Timer",
+      "inport": "StartTimerOncePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "IPCamera",
+      "outport": "CameraFramePort",
+      "to": "App",
+      "inport": "CameraFramePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetFramePort",
+      "to": "IPCamera",
+      "inport": "GetFramePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "TriggerAlarmPort",
+      "to": "Alarm",
+      "inport": "TriggerAlarmPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushWithImagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushWithImagePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "TapInPort",
+      "to": "Tap",
+      "inport": "TapInPort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetTapStatePort",
+      "to": "Tap",
+      "inport": "GetTapStatePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "PushNotifier",
+      "outport": "DismissReceivedPort",
+      "to": "NOT",
+      "inport": "NOTInPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "PushNotifier",
+      "outport": "DismissReceivedPort",
+      "to": "Timer",
+      "inport": "StopTimerPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Timer",
+      "outport": "TimerExpiredPort",
+      "to": "Tap",
+      "inport": "TapConditionPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "Tap",
+      "outport": "TapOutPort",
+      "to": "HttpRequest",
+      "inport": "HttpPostPort",
+      "mode": "duplex"
+    },
+    {
+      "from": "NOT",
+      "outport": "NOTOutPort",
+      "to": "Tap",
+      "inport": "TapConditionPort",
+      "mode": "simplex"
+    }
+  ]
+}

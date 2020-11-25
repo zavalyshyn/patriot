@@ -1,0 +1,5 @@
+FROM alpine:3.7
+RUN apk add --no-cache nodejs-npm python2 make g++ cairo-dev pango-dev jpeg-dev pixman-dev gfortran openblas gsl lapack
+RUN apk add libbsd
+CMD cd /patriot && npm install
+

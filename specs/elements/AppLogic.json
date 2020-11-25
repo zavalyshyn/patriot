@@ -1,0 +1,73 @@
+{
+  "name": "App Logic",
+  "description": "Untrusted element of the StepsCounter app",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "StepsMadeIn",
+      "type": "StepsMadePort",
+      "dataType": {
+        "in": null,
+        "out": ["StepsMadeType"]
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 2,
+      "tag": "KVSGet",
+      "type": "KVSGetPort",
+      "dataType": {
+        "in": ["KeyType"],
+        "out": ["ValueType"]
+      },
+      "mode": "duplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 3,
+      "tag": "KVSPut",
+      "type": "KVSPutPort",
+      "dataType": {
+        "in": ["KeyType","ValueType"],
+        "out": ["StatusType"]
+      },
+      "mode": "duplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 4,
+      "tag": "GraphVis",
+      "type": "GraphVisPort",
+      "dataType": {
+        "in": ["DataType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 5,
+      "tag": "UserInput",
+      "type": "UserInputPort",
+      "dataType": {
+        "in": ["InputType"],
+        "out": ["OutputType"]
+      },
+      "mode": "duplex",
+      "issuer": "active"
+    },
+    {
+      "portNum": 6,
+      "tag": "FitVibrate",
+      "type": "FitVibratePort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "AppLogicModule"
+}

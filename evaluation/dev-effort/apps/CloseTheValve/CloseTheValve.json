@@ -1,0 +1,56 @@
+{
+  "name": "CloseTheValve",
+  "description": "Auto close the valve when leakage is detected",
+  "elements": [
+    {
+      "name": "WaterValve",
+      "type": "WaterValve"
+    },
+    {
+      "name": "MoistureSensor",
+      "type": "MoistureSensor"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "SMSNotifier",
+      "type": "SMSNotifier"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "MoistureSensor",
+      "outport": "WaterDetectedPort",
+      "to": "App",
+      "inport": "WaterDetectedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "ClosePort",
+      "to": "WaterValve",
+      "inport": "ClosePort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendSMSPort",
+      "to": "SMSNotifier",
+      "inport": "SendSMSPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushPort",
+      "to": "PushNotifier",
+      "inport": "SendPushPort",
+      "mode": "simplex"
+    }
+  ]
+}

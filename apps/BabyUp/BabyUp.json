@@ -1,0 +1,52 @@
+{
+  "name": "BabyUp",
+  "description": "An app connects to baby cam and notifies you when your baby wakes up (via motion detection)",
+  "elements": [
+    {
+      "name": "MotionDetection",
+      "type": "MotionDetection"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    },
+    {
+      "name": "IPCamera",
+      "type": "IPCamera"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    }
+  ],
+  "connections":[
+    {
+      "from": "IPCamera",
+      "outport": "CameraFramePort",
+      "to": "MotionDetection",
+      "inport": "CheckForMotionPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "MotionDetection",
+      "outport": "MotionDetectedPort",
+      "to": "App",
+      "inport": "MotionDetectedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "GetFramePort",
+      "to": "IPCamera",
+      "inport": "GetFramePort",
+      "mode": "duplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushWithImagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushWithImagePort",
+      "mode": "simplex"
+    }
+  ]
+}

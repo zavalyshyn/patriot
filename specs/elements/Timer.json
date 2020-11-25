@@ -1,0 +1,18 @@
+{
+  "name": "Timer",
+  "description": "Timer sends expired (boolean true) event on TimerExpiredPort after a certain time",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "TimerExpired",
+      "type": "TimerExpiredPort",
+      "dataType": {
+        "in": null,
+        "out": ["BooleanType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "TimerModule"
+}

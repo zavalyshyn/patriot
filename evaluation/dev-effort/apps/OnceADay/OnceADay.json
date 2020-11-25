@@ -1,0 +1,27 @@
+{
+  "name": "OnceADay",
+  "description": "Turns the switch on and off at a predefined times",
+  "elements": [
+    {
+      "name": "Switch",
+      "type": "Switch"
+    },
+    {
+      "name": "TimeController",
+      "type": "TimeController",
+      "config": {
+        "starttime": "10:00",
+        "endtime": "18:00"
+      }
+    }
+  ],
+  "connections":[
+    {
+      "from": "TimeController",
+      "outport": "ControlPort",
+      "to": "Switch",
+      "inport": "SwitchTurnPort",
+      "mode": "simplex"
+    }
+  ]
+}

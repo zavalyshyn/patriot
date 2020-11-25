@@ -1,0 +1,29 @@
+{
+  "name": "NOT",
+  "description": "NOT element fires a boolean event opposite to the one on his input port",
+  "ports": [
+    {
+      "portNum": 1,
+      "tag": "NOTIn",
+      "type": "NOTInPort",
+      "dataType": {
+        "in": ["BooleanType"],
+        "out": null
+      },
+      "mode": "simplex",
+      "issuer": "passive"
+    },
+    {
+      "portNum": 3,
+      "tag": "NOTOut",
+      "type": "NOTOutPort",
+      "dataType": {
+        "in": null,
+        "out": ["BooleanType"]
+      },
+      "mode": "simplex",
+      "issuer": "active"
+    }
+  ],
+  "implementation": "NOTModule"
+}

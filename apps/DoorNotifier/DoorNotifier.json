@@ -1,0 +1,41 @@
+{
+  "name": "DoorNotifier",
+  "description": "An app sends you a push message when the door lock is opened or closed",
+  "elements": [
+    {
+      "name": "DoorLock",
+      "type": "DoorLock"
+    },
+    {
+      "name": "App",
+      "type": "untrusted"
+    },
+    {
+      "name": "PushNotifier",
+      "type": "PushNotifier"
+    }
+  ],
+  "connections":[
+    {
+      "from": "DoorLock",
+      "outport": "DoorOpenedPort",
+      "to": "App",
+      "inport": "DoorOpenedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "DoorLock",
+      "outport": "DoorClosedPort",
+      "to": "App",
+      "inport": "DoorClosedPort",
+      "mode": "simplex"
+    },
+    {
+      "from": "App",
+      "outport": "SendPushMessagePort",
+      "to": "PushNotifier",
+      "inport": "SendPushMessagePort",
+      "mode": "simplex"
+    }
+  ]
+}
