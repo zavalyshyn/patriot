@@ -1,4 +1,4 @@
-# PatrIoT project
+# PatrIoT: a Private-by-Design Smart Home Platform
 
 ## Installation
 
@@ -37,30 +37,6 @@ Note:
 - in order to pull SCONE:nodejs Docker image you need to be logged in with your Docker Hub account that was previously authorized by the SCONE maintainers. 
 - SGX machine needs to have Docker and SGX SDK installed
 
-#### Tensorflow.js Mobilenet Model using deprecated calls
-
-Currently available version of `@tensorflow-models/mobilenet` npm package still uses deprecated calls to various functions (e.g. loadModel(), fromPixels()). It still works though, but causes a bunch of deprecation warning appear at the stdout. 
-
-The source code available at the [Github](https://github.com/tensorflow/tfjs-models/tree/master/mobilenet) have been upgraded to fix this, but was not yet pushed to npm repository apparently. Until a new version of the package appears there, we can modify the source code manually:
-
- Files to modify:
- 
- `node_modules/@tensorflow-models/mobilenet/dist/index.js`;
- 
- `node_modules/@tensorflow-models/mobilenet/dist/mobilenet.js`
- 
- ```javascript
-// return [4, tf.loadModel(this.path)];     // OLD
-return [4, tf.loadLayersModel(this.path)];  // NEW
-```
-
-```javascript
-// img = tf.fromPixels(img);        // OLD
-img = tf.browser.fromPixels(img);   // NEW
-```
-
-One way to always use the latest version of the mobilnet package is to install it from the master branch of the Github repo. The process is explained [here](https://stackoverflow.com/questions/8243527/use-git-dependencies-with-npm-and-node-on-heroku/8306715#8306715). 
-
 #### Outdated Alpine Linux dependancy
 
 SCONE curated Docker images is built on outdated Alpine Linux image (v 3.6). The latest version of Alpine Linux Docker image is v 3.9.
@@ -69,10 +45,14 @@ The latest Alpine Docker image has the newest node and npm packages versions, wh
 
 One workaround is to use the previous version of Alpine Docker image for crosscompiling the npm packages. More specifically v 3.8. This version still works as intended. That's why from now on we need to specify the version of Alpine we want to pull from the Docker Hub for crosscompilation (Docker files were updated accordingly in `/script` folder of the project).
 
-#### No support for tfjs-node (Tensorflow.js) npm module in Alpine Linux
 
-Tensorflow.js for Node.js comes with a special module tfjs-node which makes running Tensorflow inside node faster. It uses C++ source code, instead of pure JS. Although, you can still run JS version of Tensorflow.js package inside node without any modification, it will be much slower as compared with the C version. So having tfjs-node package installed is preferred.
+## Citing this work
 
-But we're unable to use tfjs-node in our project. The reason for that is that tfjs-node module is compiled against glibc libraries and is supposed to be used on GLIBC compatible OSes (e.g. Ubuntu). PatrIoT, on the other hand, is using SCONE Docker images which is based on Alpine Linux. Alpine linux is a MUSL-based OS and doesn't contain the libraries tfjs-node expects to have access to.
-
-
+``` 
+@article{zavalyshyn2020patriot,
+  title={My House, My Rules: A Private-by-Design Smart Home Platform},
+  author={Zavalyshyn, Igor and Santos, Nuno and Sadre, Ramin and Legay, Axel},
+  journal={EAI MobiQuitous},
+  year={2020}
+}
+```
