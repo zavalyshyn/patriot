@@ -20,11 +20,6 @@ The web interface will be available at the following link:
 The flow graph of the running application will be available at:
 `https://<hostname>:3000/graph`
 
-## Current challenges
-
-3) The PatrIoT modules (elements & services) written in Javascript might not be able to support computationally intensive operations (e.g. face or voice recognition, machine learning, etc.). The modules providing such a functionality are written in C, Java or Python. We might need to somehow run modules written in other languages from within the Javascript. This is challenging because SCONE doesn't allow to spawn child processes. 
-
-
 ## Notes
 
 #### Compiling npm packages
